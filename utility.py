@@ -127,10 +127,10 @@ dict_allyItems_boundaries = [
     [1491, 1538, 1841, 1905]]
 
 dict_allyHealthMana_boundaries = [
-    [1545,1564,1175,1560],
-    [1576,1596,1175,1560]]
+    [1549,1568,1175,1560],
+    [1578,1596,1175,1560]]
 
-dict_allyBuffs_boundaries = [1290,1390,942,1504]
+dict_allyBuffs_boundaries = [1290,1390,942,1604]
 
 dict_allyKpAndNameFile = [
     {"desc": None,

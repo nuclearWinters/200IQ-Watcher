@@ -25,6 +25,7 @@ def connect(local_id):
                 "payload": str(local_id)
             }
             msg = json.dumps(msg)
+            print(msg)
             ws.send(msg)
             return ws
             break
@@ -34,17 +35,12 @@ def connect(local_id):
 
 # Programa principal:
 if __name__ == '__main__':
-
-    db = Firebase.db
-    local_id = Firebase.local_id
-    id_token = Firebase.id_token
-
-    ws = connect(local_id)
+    ws = connect(1)
     
     #Obtenemos las imagenes de OBS
-    videoinput = cv2.VideoCapture(1)
-    videoinput.set(cv2.CAP_PROP_FRAME_WIDTH, 1960)
-    videoinput.set(cv2.CAP_PROP_FRAME_HEIGHT, 1620)
+    #videoinput = cv2.VideoCapture(1)
+    #videoinput.set(cv2.CAP_PROP_FRAME_WIDTH, 2880)
+    #videoinput.set(cv2.CAP_PROP_FRAME_HEIGHT, 1620)
 
     #Cargamos la base de datos de los modelos (Crear para Ally y Enemy por separado)
     selectedDataBaseMine = orec.loadModelsFromDirectoryMine()
@@ -75,13 +71,13 @@ if __name__ == '__main__':
     dict_allyBuffs_boundaries = util.dict_allyBuffs_boundaries
     dict_allyKpAndNameFile = util.dict_allyKpAndNameFile
 
-    #frame = cv2.imread("full.png")
+    frame = cv2.imread("full.png")
 
     number = 0
     while True:
         start_time = time.time()
         print(str(number) + " Frame")
-        ret, frame = videoinput.read()
+        #ret, frame = videoinput.read()
         if frame is None:
             print('End of video input')
             break
@@ -136,10 +132,9 @@ if __name__ == '__main__':
             msg = json.dumps(msg)
             try:
                 ws.send(msg)
-                time.sleep(3)
             except Exception:
                 time.sleep(3)
-                ws = connect(local_id)
+                ws = connect(1)
             print("diferentes... mensaje enviado")
         x = 1 - (time.time() - start_time)
         if x <= 0:

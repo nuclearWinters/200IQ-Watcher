@@ -96,7 +96,7 @@ def AllyHealthDetector(health_detector_boundaries, frame, JSON_detected, model, 
     return JSON_detected
 
 def EnemyDetector(JSON_detected, model, number, modelPercent, imgin, flann, selectedDataBase, detector, frameRead, threshold_imgin, threshold_imgin_1):
-    img_gray = imgin[0:205,0:554]
+    img_gray = imgin[168:314,186:503]
     template = cv2.imread('./data/enemyMatcher.png',0)
     w, h = template.shape[::-1]
     res = cv2.matchTemplate(img_gray,template,cv2.TM_CCOEFF_NORMED)
@@ -104,7 +104,7 @@ def EnemyDetector(JSON_detected, model, number, modelPercent, imgin, flann, sele
     loc = np.where( res >= threshold)
     if len(loc[0]) > 0:
         #Barras de vida y mana:
-        enemy_HPMana_bars = [[64,79,305,516], [91,106,305,516]]
+        enemy_HPMana_bars = [[68,83,305,516], [95,111,305,516]]
         enemy_stats = [[23,46,47,105],[23,46,136,194],[61,84,47,105],[61,84,136,194],[101,124,47,105],[101,124,136,194],[140,163,47,105],[140,163,136,194],[87,110,272,293]]
         dict_enemyItemsAndChampion_boundaries = [[122, 166, 209, 250],[122, 166, 254, 295],[122, 166, 298, 339],[122, 166, 342, 383],[122, 166, 386, 427],[122, 166, 430, 471],[22, 82, 206, 299]]
         divisions = [[15, 25], [30, 40], [42, 52]]
@@ -213,13 +213,11 @@ def extractorDeVida(health_detector_boundaries, frame, model, JSON_detected, num
                         string = "/"
             stringResult = stringResult.split("/")
             #print(stringResult)
+            #cv2.imwrite("test" + str(index) + str(stringSide) + str(number) + ".png", thresh)
             if len(stringResult) == 2:
                 #print(number)
                 if index == 0:
-                    #health_img = "{}_health_img_{}.png".format(stringSide, number)
-                    #health_img_full = "{}_health_img_full_{}.png".format(stringSide, number)
-                    #cv2.imwrite(health_img, im)
-                    #cv2.imwrite(health_img_full, imCopy)
+                    #cv2.imwrite("testHealth" + str(stringSide) + str(number) + ".png", thresh)
                     if int(stringResult[0]) == 0:
                         JSON_detected[stringSide]["health_bar"] = 0
                     
@@ -230,10 +228,7 @@ def extractorDeVida(health_detector_boundaries, frame, model, JSON_detected, num
                     JSON_detected[stringSide]["currentHealth"] = int(stringResult[0])
                     JSON_detected[stringSide]["maxHealth"] = int(stringResult[1])
                 elif index == 1:
-                    #mana_img = "{}_mana_img_{}.png".format(stringSide, number)
-                    #mana_img_full = "{}_mana_img_full_{}.png".format(stringSide, number)
-                    #cv2.imwrite(mana_img, im)
-                    #cv2.imwrite(mana_img_full, imCopy)
+                    #cv2.imwrite("testMana" + str(stringSide) + str(number) + ".png", thresh)
                     if int(stringResult[0]) == 0:
                         JSON_detected[stringSide]["mana_bar"] = 0
                     else:
@@ -329,6 +324,7 @@ def extractorDeStats(enemy_stats, frame, model, JSON_detected, side, number, div
                         string = "/"
             #stringResult = stringResult.split("/")
             #print(stringResult)
+            #cv2.imwrite("test" + str(index) + str(side) + str(number) + ".png", thresh)
             if index == 0:
                 #img = "{}_AD1_{}.png".format(side, number)
                 #imgThresh = "{}_AD2_{}.png".format(side, number)

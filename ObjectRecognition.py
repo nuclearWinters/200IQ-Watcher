@@ -79,7 +79,7 @@ class ImageFeatureTemplate(object):
 
 def loadModelsFromDirectoryTemplate():
     dataBase = []
-    for imageFile in os.listdir("C:/Users/Fernandoo/Downloads/object-recognition-opencv-python-master-a9b184d6cd19eef59de976135d359d3f8d6f9783/p5-objrecon/templates"):
-        grayImage = cv2.imread("C:/Users/Fernandoo/Downloads/object-recognition-opencv-python-master-a9b184d6cd19eef59de976135d359d3f8d6f9783/p5-objrecon/templates/" + str(imageFile), 0)
+    for imageFile in os.listdir("C:/Users/Fernandoo/Documents/Object Recognition 200IQ/templates"):
+        grayImage = cv2.imread("C:/Users/Fernandoo/Documents/Object Recognition 200IQ/templates/" + str(imageFile), 0)
         dataBase.append(ImageFeatureTemplate(imageFile, grayImage))
     return dataBase
